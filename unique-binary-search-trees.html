@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>SIPPATHAMM - Unique Binary Search Trees (Dynamic Programming)</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.png">
+    <!-- NewsBoard CSS  -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/widgets.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+
+<body>
+    <!--Offcanvas sidebar-->
+    <aside id="sidebar-wrapper" class="custom-scrollbar offcanvas-sidebar">
+    </aside>
+    <!-- Start Main content -->
+    <main class="bg-grey pb-30">
+        <div class="container single-content">
+            <div class="entry-header entry-header-style-1 mb-50 pt-50">
+                <h1 class="entry-title mb-50 font-weight-900">
+                    Unique Binary Search Trees (Dynamic Programming)
+                </h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="entry-meta align-items-center meta-2 font-small color-muted">
+                            <p class="mb-5">
+                                <a class="author-avatar" href="#"><img class="img-circle" src="assets/imgs/authors/author-3.jpg" alt=""></a>
+                                By <a href="author.html"><span class="author-name font-weight-bold">Sippawit Thammawiset</span></a>
+                            </p>
+                            <span class="mr-10"> November 9, 2021</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-right d-none d-md-inline">
+                        <ul class="header-social-network d-inline-block list-inline mr-15">
+                            <li class="list-inline-item text-muted"><span>Share this: </span></li>
+                            <li class="list-inline-item"><a class="social-icon fb text-xs-center" target="_blank" href="#"><i class="elegant-icon social_facebook"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--end single header-->
+            <figure class="image mb-30 m-auto text-center border-radius-10">
+                <img class="border-radius-10" src="assets/imgs/posts/unique-binary-search-trees/unique-binary-search-trees.png" alt="post-title" />
+                <figcaption>รูปที่ 1 เมื่อ n = 3 จะสามารถสร้าง Binary Search Tree ได้ทั้งหมด 5 แบบ</figcaption>
+            </figure>
+            <!--figure-->
+            <article class="entry-wraper mb-50">
+                <div class="entry-main-content wow fadeIn animated">
+                    <p>Unique Binary Search Tree อธิบายปัญหาสั้น ๆ ได้ว่า กำหนดให้จำนวนเต็ม n คืนค่าจำนวนต้นไม้ที่ไม่ซ้ำกัน (Binary Search Tree) ซึ่งมี n โหนดที่มีค่าตั้งแต่ 1 ถึง n จากรูปที่ 1 เมื่อ n = 3 จะสามารถสร้าง Binary Search Tree ได้ทั้งหมด 5 แบบ โดย Binary Search Tree ที่ 1 กับ 5 (จากซ้ายไปขวา) ถือว่าเป็นคนละแบบ ในขณะเดียวกัน Binary Search Tree ที่ 2 กับ 3 ก็ถือว่าเป็นคนละแบบเช่นกัน</p>
+                    <p>แน่นอนว่าเมื่อเจอ Binary Search Tree จะต้องมีเรื่องของ Recursion เข้ามาเกี่ยวข้อง จากรูปที่ 2 หากลองสังเกตดูดี ๆ BST (ขอย่อ Binary Search Tree ว่า BST) ที่มี 3 Node มันสร้างมาจาก BST ที่มี 2 Node และ 1 Node (Sub-tree) เพียงแค่สลับตำแหน่งกันไปมาเท่านั้นเอง กำหนดให้ c(n) แทนจำนวนวิธีที่สามารถสร้าง BST ที่มี n Node และมี Base case คือ เมื่อ n <= 1 ก็ return 1 ไปซะ (BST ที่มี 1 Node สร้างได้แค่แบบเดียว)</p>
+                    <figure>
+                        <img class="border-radius-5" src="assets/imgs/posts/unique-binary-search-trees/figure2.png">
+                        <figcaption>รูปที่ 2 BST ที่มี 3 Node เกิดจาก BST ที่มี 2 Node (สีฟ้า) และ BST ที่มี 1 Node (สีส้ม)</figcaption>
+                    </figure>
+                    <p>แนวคิดต่อมาคือ เราจะให้หนึ่ง Node เป็นรากอยู่กับที่ หาก BST นี้มี n Node เราจะได้ว่า Sub-tree ทางซ้ายมี n – n Node นั่นคือสามารถสร้าง BST ทางซ้ายได้ c(n – n) วิธี ในขณะเดียวกัน Sub-tree ทางขวามี n – 1 Node นั่นคือสามารถสร้าง BST ทางขวาได้ c(n – 1) วิธี เมื่อรวมกันก็ได้เป็น BST ต้นใหญ่ที่มี n Node (0 Node ทางซ้าย + 1 Node ที่เป็นราก + n – 1 Node ทางขวา) ซึ่ง Sub-tree ทางซ้ายและ Sub-tree ทางขวาของต้นไม้นี้เป็นอิสระต่อกัน จึงเป็นการคูณไม่ใช่การบวก และก็หาผลรวมทุกกรณีที่ Node ของ Sub-tree ทางซ้ายและ Sub-tree ทางขวารวมกันได้ n Node</p>
+                    <figure>
+                        <img class="border-radius-5" src="assets/imgs/posts/unique-binary-search-trees/figure3.png">
+                        <figcaption>รูปที่ 3 ตัวอย่างของ Recurrence c(n) เมื่อ n = 4</figcaption>
+                    </figure>
+                    <p>ดูแล้วก็คุ้น ๆ เหมือนทฤษฎีบททวินามเลยแฮะ แต่มันคือ Catalan number มีประโยชน์ในเรื่องของการหาจำนวนวิธีที่สามารถสร้างวงเล็บ n คู่ โดยที่วงเล็บทั้งหมดนั้นต้องเรียงกันอย่างถูกต้อง เช่น n = 3 สามารถสร้างได้ 5 แบบ ดังนี้ ((())), ()(()), ()()(), (())() และ (()()), การหาจำนวนวิธีที่สามารถสร้าง BST ที่มี n Node (บทความนี้นี่เอง), การหาจำนวนวิธีการเดินทางจากมุมซ้ายล่างไปยังมุมขวาบนของรูปสี่เหลี่ยม n x n โดยที่สามารถเดินได้เพียง 2 แบบคือขึ้นและไปทางขวาและห้ามผ่านเส้นทแยงมุมของรูปสี่เหลี่ยม เป็นต้น ซึ่ง Sequence ของ Catalan number นั้นเติบโตแบบน่ากลัวมาก (1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, …) แถม Recurrence ของมันก็ยังเกิดการทำงานซ้ำซากอีก เลยต้องใช้ Dynamic Programming และ Memoization เข้ามาช่วยจดจำคำตอบ</p>
+                </div>
+                <div class="single-social-share clearfix wow fadeIn animated">
+                    <ul class="header-social-network d-inline-block list-inline float-md-right mt-md-0 mt-4">
+                        <li class="list-inline-item text-muted"><span>Share this: </span></li>
+                        <li class="list-inline-item"><a class="social-icon fb text-xs-center" target="_blank" href="#"><i class="elegant-icon social_facebook"></i></a></li>
+                    </ul>
+                </div>
+                <!--author box-->
+                <div class="author-bio p-30 mt-50 border-radius-10 bg-white wow fadeIn animated">
+                    <div class="author-image mb-30">
+                        <a href="author.html"><img src="assets/imgs/authors/author-3.jpg" alt="" class="avatar"></a>
+                    </div>
+                    <div class="author-info">
+                        <h4 class="font-weight-bold mb-20"><span class="vcard author"><span class="fn"><a href="author.html" title="Posted by Barbara Cartland" rel="author">Barbara Cartland</a></span></span>
+                        </h4>
+                        <h5 class="text-muted">About author</h5>
+                        <div class="author-description text-muted">You should write because you love the shape of stories and sentences and the creation of different words on a page. </div>
+                        <a href="author.html" class="author-bio-link mb-md-0 mb-3">View all posts (125)</a>
+                        <div class="author-social">
+                            <ul class="author-social-icons">
+                                <li class="author-social-link-facebook"><a href="#" target="_blank"><i class="ti-facebook"></i></a></li>
+                                <li class="author-social-link-twitter"><a href="#" target="_blank"><i class="ti-twitter-alt"></i></a></li>
+                                <li class="author-social-link-pinterest"><a href="#" target="_blank"><i class="ti-pinterest"></i></a></li>
+                                <li class="author-social-link-instagram"><a href="#" target="_blank"><i class="ti-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <!--container-->
+    </main>
+    <div class="dark-mark"></div>
+    <!-- Vendor JS-->
+    <script src="./assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="./assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/vendor/popper.min.js"></script>
+    <script src="./assets/js/vendor/bootstrap.min.js"></script>
+    <script src="./assets/js/vendor/jquery.slicknav.js"></script>
+    <script src="./assets/js/vendor/slick.min.js"></script>
+    <script src="./assets/js/vendor/wow.min.js"></script>
+    <script src="./assets/js/vendor/jquery.ticker.js"></script>
+    <script src="./assets/js/vendor/jquery.vticker-min.js"></script>
+    <script src="./assets/js/vendor/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/vendor/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/vendor/jquery.magnific-popup.js"></script>
+    <script src="./assets/js/vendor/jquery.sticky.js"></script>
+    <script src="./assets/js/vendor/perfect-scrollbar.js"></script>
+    <script src="./assets/js/vendor/waypoints.min.js"></script>
+    <script src="./assets/js/vendor/jquery.theia.sticky.js"></script>
+    <!-- NewsBoard JS -->
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>
