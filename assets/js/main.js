@@ -399,7 +399,7 @@
     $(document).ready(function() {
         openSearchForm();
         OffCanvas();
-        customScrollbar();
+        //customScrollbar();
         magPopup();
         scrollToTop();
         headerSticky();
